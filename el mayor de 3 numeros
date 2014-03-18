@@ -1,0 +1,26 @@
+// el mayor de 3 num.cpp : Defines the entry point for the console application.
+//   autor: Andres Perez
+//   fecha: 18/03/14
+    #include "stdafx.h"
+    #include <iostream>
+    #include "conio.h"
+    using namespace std;  
+    void main(){  
+        int A,B,C;  
+        cout<<("Ingresa un numero ")<<endl;  
+        cin>>A;  
+        cout<<("Ingresa otro numero ")<<endl;  
+        cin>>B;  
+        cout<<("Ingresa un numero ")<<endl;  
+        cin>>C;
+        if(A > B &  A > C  
+        cout<<"El numero mayor es "<<A;  
+	    else
+            if(B > A & B > C)
+            cout<<"El numero mayor es "<<B;  
+			else
+            cout<<"El numero mayor es "<<C;  
+            }  
+        }  
+       getch();  
+    }  
