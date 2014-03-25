@@ -1,0 +1,24 @@
+// considerando dos numeros.cpp : Defines the entry point for the console application.
+// autor:Andres Perez
+// fecha: 25/03/14
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+using namespace std;
+void main() 
+{int n1,n2,res;
+ cout<<"\t\t SUMA Y PRODUCTO DE DOS NUMEROS PARES E IMPARES \n\n";
+ cout<<"ingrese numero 1:\n\n ";
+ cin>>n1;
+ cout<<"ingrese numero 2:\n\n ";
+ cin>>n2;
+ if((n1 %2==0) && (n2 %2==0))
+ res=n1+n2;
+ else
+ res=n1*n2;
+ cout<<" el resultado es "<<res;
+getch();
+}
+
