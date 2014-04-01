@@ -10,14 +10,14 @@
 
 using namespace std;
 void main()
-{ 
+{
 int suma,i,Z;
 cout<<"ingresar el valor de Z:";
 cin>>Z;
 suma=0;
+cout <<"Suma=";
 for (i=1;i<=Z;i=i+2)
-    suma=suma+i;
-cout<<"la suma de los "<<Z<<" primeros numeros enteros impares es:"<<suma;
+{suma=suma+i;
+cout<<i<<"+";}
+cout<<"\n la suma de los "<<Z<<" primeros numeros enteros impares es:"<<suma;
     getch();
-
-}
