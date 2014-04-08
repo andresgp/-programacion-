@@ -1,0 +1,53 @@
+// parcial ejercicio.cpp : Defines the entry point for the console application.
+// Nombre:Andres Perez 
+// Fecha : 08/04/14
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+
+void main ()
+{float p1,p2,p3,pp,final,nf;
+do 
+{cout<<"introducir parcial 1";
+ cin>>p1;
+}
+while ((p1>100 || p1<0)&&(p1!=-99));
+
+while (p1 != -99)
+{
+do
+{cout<<"introducir parcial 2";
+ cin>>p2;
+}
+while (p2>100 || p2<0);
+do
+{cout<<"introducir parcial 3";
+ cin>>p3;
+}
+while (p3>100 || p3<0);
+do
+{cout<<"introducir practico";
+cin>>pp;
+}
+while (pp>100 || pp<0);
+do
+{cout<<"introducir examen final";
+ cin>>final;
+}
+while (final>100 || final<0);
+nf=(p1+p2+p3)/3 *0.4+pp*0.2+final*0.4;
+cout<<"nota final" << nf;
+do
+{cout<<"introducir practico1";
+ cin>>p1;
+}
+while ((p1>100 || p1<0)&& (p1 != -99));
+}
+
+	getch ();
+}
+
