@@ -1,0 +1,31 @@
+// binario x a un decimal.cpp : Defines the entry point for the console application.
+//nombre:Andres Perez
+//fecha:13/05/14
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include"math.h"
+
+using namespace std;
+
+int decimal(int x) ;
+
+void main ()
+ {int n,binario_A_decimal;
+ cout<<"ingrese el numero binario";
+ cin>>n;
+ binario_A_decimal=decimal(n);
+ cout<<n<<"en decimal es"<<binario_A_decimal<<endl;
+	getch();
+}
+int decimal(int x)
+{
+int i=1,suma=0,dig;
+while(x>0)
+{dig=x%10;
+x=x/10;
+suma=(suma+pow(2.0,(i-1))*dig);
+i=i++;}
+return suma;
+}
