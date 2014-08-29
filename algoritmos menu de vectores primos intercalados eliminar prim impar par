@@ -1,0 +1,142 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+bool verificarSiEsPrimo(int n){
+int i;
+bool k = true;
+for (i=2;i<=n-1;i++){
+if (n % i == 0){
+k = false;
+}
+}
+return (k);
+}
+int obtenerNesimoPrimo(int n )
+{int cp=0,c=0;
+  while(cp<n)
+  { c++;
+    if(verificarSiEsPrimo(c))
+	{cp++;
+	}
+  }
+  return(c);
+}
+
+
+void cargarPrimoAscyDesc(int vec[],int n)
+{int i , contasc=1,contdesc=n/2;
+     for(i=0;i<n;i++);
+	 { if(i%2==0)
+	     {vec[i] = obtenerNesimoPrimo(contasc);
+	        contasc++;
+	                 }
+	                  else
+	                     {vec[i] = obtenerNesimoPrimo(contdesc);
+	                      contdesc--;
+	 }
+	 }
+}
+void cargar(int vec[], int n){
+int i;
+for(i=0;i<n;i++){
+cout<< "introducir elemento ["<<i<<"]:";
+cin >> vec[i];
+}
+}
+void mostrar(int vec[],int n){
+int i;
+cout<< endl << "\nlos elementos del vector son : ";
+for (i=0;i<n;i++){
+cout<< endl << "vec["<<i<<"]: " << vec[i];
+}
+}
+int sumarElementos(int vec[],int n){
+int i,s=0;
+for(i=0;i<n;i++){
+s = s + vec[i];
+}
+return (s);
+}
+bool verifarElemVector(int vec[],int n,int Elem){
+int i;
+bool k = false;
+for(i=0;i<n;i++){
+if(vec[i] == Elem){
+k = true;
+}
+}
+return(k);
+}
+void cargarImparPrimoPar(int vec[],int n )
+  {int i,cImp=1,cPrim=1,cPar=2,k=1;
+     for(i=0;i<n;i++);
+	 { if(k==1)//impar
+	   {vec[i]=cImp;
+	    cImp=cImp+2;
+		k=2;
+	 }
+	 else
+	 {  if(k==2)//primo
+	     {vec[i] = obtenerNesimoPrimo(cPrim++);
+	            k=3;
+	 }
+	    else          //par
+	      {vec[i] = cPar;
+           cPar=cPar+2;
+		   k=1;
+	 }
+	 }
+	 }
+}
+void eliminarElemento(int vec[],int &n,int elem) 
+{int i ;
+  for(i=0;i<n;i++)
+    {if(vec[i]==elem)
+      {for(k=i;k<n-1;k++)
+  {vec[k]=vec[k+1];
+  }
+  n--;
+  i--;
+  }
+  }
+}
+bool frecuenciaDeUnElemento(int vec[],int n,int Elem){
+int i,c;
+for(i=0;i<n;i++){
+if(vec[i] == Elem){
+c++;
+}
+}
+return(c);
+}
+
+void main(){
+int v[30],nroElem=0,opcion,Elem;
+do{
+cout << endl << "***** MENU ******";
+cout << endl << "1.- Cargar vector";
+cout << endl << "2.- Mostrar vector";
+cout << endl << "3.- Cargar automaticamente con primos intercalados asc y desc";
+cout << endl << "4.- Cargar automaticamente con primos,impar,primo,par...";
+cout << endl << "5.- eliminar un elemento...";
+cout << endl << "0.- Salir";
+cout << endl << "Seleccione Opcion";
+cin >> opcion;
+switch(opcion){
+case 1 : cout << "Introducir numero de elementos:";
+cin >> nroElem;
+cargar(v,nroElem);
+break;
+case 2 : mostrar(v,nroElem);
+break;
+case 3 : cout << "\nintroducir numero de elementos: " ;
+	    cin>>nroElem;
+		cargarPrimoAscyDesc(v,nroElem);
+break;
+case 4 : cout << "\nintroducir numero de elementos: " ;
+	    cin>>nroElem;
+		cargarImparPrimoPar(v,nroElem);
+		break;
+}
+}while(opcion != 0);
+}
