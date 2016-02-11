@@ -1,0 +1,19 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+void main(){
+	int num1,num2,c=0;
+
+	cout<<"introducir numero:";
+	cin>>num1;
+	cout<<"introducir otro numero:";
+	cin>>num2;
+	while(num1>0){
+			num1 = num1 - num2;
+			c++;
+	}
+	cout<<"el resultado de la division es "<<c;
+
+	getch();
+}
