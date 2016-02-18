@@ -1,0 +1,90 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+int cantDig(int n)
+ {    int c=0;
+		while(n>0){
+			n=n/10;
+				c++;
+		}
+		return(c);
+}
+
+int sumDig(int n)
+{	int s=0,a;
+	while(n>0){
+		a= n % 10;
+		s= s + a;
+		n= n / 10;
+	}
+	return(s);
+}
+int sumDigImpares(int n){
+	int d,s=0;
+	while(n>0){
+		d= n % 10;
+	if(d % 2 != 0){
+		s= s + d;
+	}
+	 n= n/10;
+	}
+	return(s);
+}
+
+int invertirNum(int n){
+
+	int d, numero=0;
+	while(n>0){
+	
+		d=n % 10;
+		numero=numero*10 + d;
+		n=n/10;
+	}
+	return(numero);
+}
+	
+int extraerImpares(int n){
+
+
+
+void main ()
+
+{ int a,opcion,r;
+    do{
+	cout<<"introducir numero natural---->";
+	cin>>a;
+	if(a<1 ){
+		cout<<"\nERROR...!!!!\n Debe introducir un numero natural \n debe ser un numero > o = a 1!!\n\n";
+	}
+
+	}while(a<1);
+
+	do{
+		cout<<endl<<endl<<" **** M E N U ****";
+		cout<<endl<<endl<<"1.- contar cantidad de digitos";
+		cout<<endl<<endl<<"2.- sumar todos los digitos";
+		cout<<endl<<endl<<"3.- sumar los digitos impares";
+		cout<<endl<<endl<<"4.- invertir numero";
+		cout<<endl<<endl<<"0.- salir";
+		cout<<endl<<endl<<"seleccione una opcion";
+		cin>> opcion;
+		switch(opcion){
+		case 1 : r= cantDig(a);
+			     cout<<"la cantidad de edigitos de----->  "<< a <<"es--->"<< r;
+				 break;
+		case 2 : r= sumDig(a);
+			     cout<<"la suma de los digitos de------>  "<< a <<"es--->"<< r;
+				 break;
+		case 3 : r= sumDigImpares(a);
+			     cout<<"la suma de los digitos impares de------>  "<< a <<"es--->"<< r;
+				 break;
+		case 4 : r= invertirNum(a);
+			     cout<<"invertir el numero ------>"<< a <<"es--->"<< r;
+				 break;
+		}
+		
+		}while(opcion != 0);
+	
+	
+	
+}
