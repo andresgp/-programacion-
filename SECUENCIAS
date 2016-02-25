@@ -1,0 +1,93 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+void mostrarSecImpares(int n){
+	int i , imp=1;
+	for(i=1;i<n;i++){
+		cout<<imp<<",  ";
+		imp=imp+2;
+	}
+}
+void IntercalarParImpar(int n ){
+	int k=0,par=2,imp=1,i;
+	for(i=0;i<n;i++){
+		if(k==0){
+			cout<<par<<", ";
+			par=par+2;
+			k=1;
+		}else{
+			cout<<imp<<", ";
+			imp=imp+2;
+			k=0;
+		}
+	}
+}
+
+void SecuenciaDeCuadrados(int n){
+	int i,c=1;
+		for(i=1;i<n;i++){
+			c=i*i;
+
+			cout<<c<<", ";
+			
+		}
+}
+
+void SecuanciaAbC(int n ){
+	int k,i;
+		for(i=0;i<n;i++){
+			if(k==0){
+				cout<<"a"<<" ";
+				k=1;
+			}else{
+				if(k==1){
+				cout<<"b"<<" ";
+				k=2;
+
+				}else{
+					cout<<"c"<<" ";
+						k=0;
+				}
+			}
+		}
+}
+void Secuencia124711(int n){
+	int i,s=1;
+	for(i=1;i<n;i++){
+		cout<<s<<" ";
+		s=s+i;
+		
+	}
+}
+void SecuenciaSumaYresta(int n ){
+	int i,k=0,s=1;
+		for(i=1;i<n;i++){
+			if(k==0){
+				cout<<s<<" ";
+				s=s+i;
+				k=1;
+			}else{
+				cout<<s<<" ";
+				s=s-i;
+				k=0;
+			}
+		}
+}
+
+void SecFibo(int n ){
+	int 
+		for(i=1;i<n;i++){
+			cout<<s;
+			r=s+i;
+
+			
+				
+
+void main(){
+	int n ;
+	cout<<"cuantos numeros a mostrar?:";
+	cin>> n;
+	SecuenciaSumaYresta(n);
+	getch();
+}
