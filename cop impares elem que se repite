@@ -1,0 +1,75 @@
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+void cargar(int vec[],int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout<<"introducir elemento";
+		cin>>  vec[i];
+	}
+}
+void mostrar(int vec[],int n){
+	int i ;
+	cout<<"\nEL VECTOR ES------>:\n";
+	for(i=0;i<n;i++){
+		cout<<endl<<"vec["<<i<<"]="<<vec[i];
+	}
+}
+
+
+void copiarElemImpares(int va[], int na,int vb[],int &nb){
+	int i;
+	nb=0;
+	for(i=0;i<na;i++){
+		if(va[i]%2 !=0){
+			vb[nb]=va[i];
+			nb++;
+		}
+	}
+	}
+int ElemQueMasSeRepite(int vec[],int n,int elem){
+	int i , c=0;
+	for(i=0;i<n;i++){
+			if(vec[i]==elem){
+				c++;
+			}
+		}
+		return(c);
+	}
+	bool verifSiExisteEnVec(int vec[],int n,int elem){
+		int i; 
+		bool k=false;
+		for(i=0;i<n;i++){
+			if(vec[i]==elem){
+				k=true;
+				i=n;
+			}
+		}
+		return(k);
+	}
+	void CopiarElemRepMasDeUnaVez(int va[],int na,int vb[],int &nb){
+		int i;
+		nb=0;
+		for(i=0;i<na;i++){
+			if(((ElemQueMasSeRepite(va,na,va[i]))>1)&&(verifSiExisteEnVec(vb,nb,va[i])==false)){
+				vb[nb]=va[i];
+				nb++;
+			}
+		}
+		
+	}
+	 
+void main(){
+	int vec[20],n,vb[20],nb;
+	cout<<"cuantos elementos para el vector? :";
+	cin>> n;
+	cargar(vec,n);
+	mostrar(vec,n);
+	//copiarElemImpares(vec,n,vb,nb);
+	CopiarElemRepMasDeUnaVez(vec,n,vb,nb);
+	mostrar(vb,nb);
+	getch();
+
+}
