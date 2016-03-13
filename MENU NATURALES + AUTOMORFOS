@@ -1,0 +1,250 @@
+#include<iostream>
+#include<conio.h>
+#include<math.h>
+using namespace std;
+int contarDig(int n){
+	int c = 0;
+	while (n > 0){
+		n = n / 10;
+		c++;
+	}
+	return(c);
+}
+int concatenar(int a, int b){
+	int suma;
+	int potencia = contarDig(b);
+	potencia = powf(10, potencia);
+	suma = (a*potencia) + b;
+	return(suma);
+}
+
+
+
+int invertirNum(int n){
+	int d, nnum=0;
+	while (n > 0){
+		d = n % 10;
+		nnum = nnum * 10 + d;
+		n = n / 10;
+
+		}
+	return(nnum);
+  
+}
+bool contarRepetidos(int n, int dig)
+{
+	bool k = false;
+	int c = 0;
+	while (n > 0){
+		if (dig == (n % 10)){
+			c++;
+		}
+		n = n / 10;
+	}
+	if (c > 1)
+		k = true;
+	return(k);
+}
+int eliminarRepetidos(int n)
+{
+	int num = 0, res,r, aux = n;
+	while (n > 0){
+		res = (n % 10);
+		if (contarRepetidos(aux, res) == false){
+			num = (num * 10) + (res);
+		}
+		n = n / 10;
+	}
+	r=invertirNum(num);
+	return(r);
+}
+int encontrarMayorDig(int n) {
+	int d, may;
+		d = n % 10;
+	    may = d;
+		while (n > 0){
+			n = n / 10;
+			if (may < n % 10){
+				may = n % 10;
+
+			}
+			
+
+		}
+		return(may);
+}
+int encontrarMenorDig(int n) {
+	int d, men;
+	d = n % 10;
+	men = d;
+	while (n > 0){
+		n = n / 10;
+		if (men > n % 10){
+			men = n % 10;
+
+		}
+
+
+	}
+	return(men);
+}
+int eliminarDigMay(int n){
+	int d, s, nnum = 0, r;
+		d = encontrarMayorDig(n);
+	while (n > 0){
+		s = n % 10;
+		if (d != s){
+			nnum = nnum * 10 + s;
+
+		}
+		n = n / 10;
+	}
+	r = invertirNum(nnum);
+	return(r);
+}
+bool verifSiesCapicua(int n){
+	
+	if (n == invertirNum(n)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+int insertarDig(int n, int b){
+	int n2 = 0, i = 0, n1, num;
+	while (n>0 && b < n % 10){
+		n2 = n2 + (n % 10)*powf(10, i);
+		n = n / 10;
+		i++;
+	}
+	n1 = n * 10 + b;
+	num = concatenar(n1, n2);
+	return(num);
+
+	    
+}
+
+int CrapulaDeunNumero(int n){
+	int d, s, d1, s2;
+	while (n > 0){
+		d = n % 10;
+		s = s + d;
+		n = n / 10;
+	}
+	if (s < 10){
+		return(s);
+	}
+	else{
+		while (s > 0){
+			d1 = s % 10;
+			s2 = s2 + d1;
+			s = s / 10;
+		}
+		if(s2<10){
+			return(s2);
+		}
+	}
+
+}
+void NumAutomorfos(int n)
+{
+	int i, cuadrado, copia, a;
+	for (i = 0; i<1000; i++)
+	{
+		cuadrado = i*i;
+		copia = i;
+		a = 1;
+		while (copia != 0 && a)
+		{
+			if (copia % 10 != cuadrado % 10)
+				a = 0;
+			copia /= 10;
+			cuadrado /= 10;
+
+		}
+		if (a)
+			cout << i << "  ";
+	}
+}
+
+void main() {
+	int a, opcion, b, r;
+	do{
+		cout << "introducir un numero natural"<<"  ";
+		cin >> a;
+		cout << "introducir otro numero natural" << "  ";
+		cin >> b;
+		if ((a < 1) || (b<1)){
+			cout << "\nERROR...!!!!\n Debe introducir un numero natural \n debe ser un numero > o = a 1!!\n\n";
+		}
+	} while ((a < 1) || (b<1));
+	do{
+		cout << endl << endl << " **** M E N U ****";
+		cout << endl << endl << "1.- concatenar numeros";
+		cout << endl << endl << "2.- eliminar digitos repetidos de a";
+		cout << endl << endl << "3.- invertir numero de a";
+		cout << endl << endl << "4.- eliminar digito mayor de a ";
+		cout << endl << endl << "5.- insertar digito en a ";
+		cout << endl << endl << "6.- verificar si es capicua";
+		cout << endl << endl << "7.- TILUCHI";
+		cout << endl << endl << "8.- Crapulo del numero a";
+		cout << endl << endl << "9.- generar numeros automorficos";
+		cout << endl << endl << "0.- salir";
+		cout << endl << endl << "seleccione una opcion";
+		cin >> opcion;
+
+		switch (opcion){
+		case 1: r = concatenar(a, b);
+			cout << "el nuevo numero es ----->  " << "es--->" << r;
+			break;
+		case 2: r = eliminarRepetidos(a);
+			cout << "el resultado es ------>  " <<  "es--->" << r;
+			break;
+		case 3: r = invertirNum(a);
+			cout << "el numero unvertido  de------>  " << a << "es--->" << r;
+			break;
+		case 4: r = eliminarDigMay(a);
+			cout << "el nuevo numero es " <<  "es--->" << r;
+			break;
+		case 5: r = insertarDig(a, b);
+			cout << "el nuevo numero " << "es--->" << r;
+			break;
+		case 6: r = verifSiesCapicua(a);
+			if (r == true){
+				cout <<"  "<< "EL NUMERO ES CAPICUA";
+			}
+			else{
+				cout <<"  "<< "EL NUMERO NO ES CAPICUA";
+			}
+			
+			break;
+		case 7: int n,  i, ht, pago;
+			cout << "ingrese el numero de trabajadores";
+			cin >> n;
+			for (i = 1; i <= n+1; i++){
+				cout << "para " << " " << i;
+				cout << "ingrese las horas trabajadas por el trabajador";
+				cin >> ht;
+				pago = ht * 20;
+				cout <<  "para " << ht 
+					<<"  " << " horas de trabajo " << "el pago es" << "-----> " << pago << "bs";
+			}
+			
+			break;
+		case 8: r = CrapulaDeunNumero(a);
+			cout <<"su crapulo es "<<"----->"<< r;
+			break;
+		case 9: 
+			cout << endl << "ingrese n: ";
+			cin >> n;
+			NumAutomorfos(n);
+			break;
+
+		}
+
+	} while (opcion != 0);
+
+
+
+}
