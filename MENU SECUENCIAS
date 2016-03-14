@@ -1,0 +1,130 @@
+#include<iostream>
+#include<conio.h>
+#include<math.h>
+using namespace std;
+
+bool VerifSiesPrimo(int n){
+	int i,c;
+    bool k = true;
+	for (i = 1; i <= n; i++){
+		if (n%i == 0){
+			c++;
+		}
+	}
+			if (c == 2) {
+				k = true;
+			}
+			else{
+				k = false;
+			}
+
+		
+		return(k);
+
+	}
+int MostrarNsimoPrimo(int n){
+	int p=0,c=0;
+	while (p < n){
+		c++;
+		if (VerifSiesPrimo(c) == true){
+			p++;
+		}
+	}
+	return(c);
+}
+void GenerarPrimos(int n){
+	int i, p;
+
+	for (i = 0; i < n; i++){
+		p = MostrarNsimoPrimo(i);
+		cout << p;
+
+	}
+}
+void SecDeCuadrInver(int n){
+	int i, d;
+	for (i = 1; i < n+1; i++){
+		d = invertirNum(powf(i, 2));
+			cout <<"  "<< d;
+	}
+}
+int SumarDig(int n){
+	int d, s = 0;
+	while (n>0){
+		d = n % 10;
+		s = s + d;
+		n = n / 10;
+	}
+	return(s);
+}
+void SecDeSumas(int n){
+	int d1 = 1,i,s=1;
+	cout << d1;
+	for (i = 0; i <= n; i++){
+		s = s + SumarDig(s);
+		cout <<"  "<< s;
+		
+
+}
+
+}
+void SecDeSumasDoble(int n){
+	int i, s = 1,s2;
+	int d1 = 1;
+	cout << d1;
+	for (i = 0; i < n; i++){
+		s = s + SumarDig(s);
+		s2 = SumarDig(s);
+		cout << "  " << s2;
+	}
+}
+void SecDeTresEnTres(int n){
+	int i, num = 0;
+	for (i = 0; i < n; i++){
+		num = num + 3;
+		cout << "   "<<num;
+	}
+	
+}
+void main() {
+	int a, opcion,  r;
+	do{
+		cout << "introducir un numero natural"<<"  ";
+		cin >> a;
+	
+		if (a < 1){
+			cout << "\nERROR...!!!!\n Debe introducir un numero natural \n debe ser un numero > o = a 1!!\n\n";
+		}
+	} while (a < 1);
+	do{
+		cout << endl << endl << " **** M E N U ****";
+		cout << endl << endl << "1.- Secuencia 1) 3 en 3";
+		cout << endl << endl << "2.- secuencia 2)de cuadrados invertidos";
+		cout << endl << endl << "3.- secuencia 3)de sumas";
+		cout << endl << endl << "4.- secuencia 4)de sumas de digitos ";
+		cout << endl << endl << "0.- salir";
+		cout << endl << endl << "seleccione una opcion";
+		cin >> opcion;
+
+		switch (opcion){
+		case 1:; SecDeTresEnTres(a);
+			
+			break;
+		case 2:  SecDeCuadrInver(a);
+			
+			break;
+		case 3: SecDeSumas(a);
+
+			break;
+		case 4: SecDeSumasDoble(a);
+
+			break;
+	
+
+		}
+
+	} while (opcion != 0);
+
+
+
+}
