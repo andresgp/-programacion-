@@ -1,0 +1,70 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string.h>
+
+struct alumno{
+char nombre[30];
+char sexo;
+int nota;
+};
+
+struct materia{
+char nombreMateria[30];
+int nroAlumnos;
+alumno vAlu[20];
+};
+
+struct regCarrera{
+char nombreCarrera[30];
+int  nroMaterias;
+materia vMat[20];
+};
+using namespace std;
+
+void cargar(regCarrera v[],int n){
+int i ,j,k;
+for(i=0;i<n;i++){            //carga carreras
+cout<<"ingrese nombre de la carrera"<<"  ";
+do{
+gets(v[i].nombreCarrera);
+}while(strlen(v[i].nombreCarrera)==0); //valida que no entre vacio 
+cout<<"ingrese numero de materias";
+cin>>v[i].nroMaterias;
+	for(j=0;j<v[i].nroMaterias;j++){ //carga materias
+		cout<<"ingrese nombre  de la materia ";
+		do{
+			gets(v[i].vMat[j].nombreMateria);
+		}while(strlen(v[i].vMat[j].nombreMateria)==0);
+		cout<<"ingrese numero de alumnos de la materia"<<"  ";
+		cin>> v[i].vMat[j].nroAlumnos;
+			for(k=0;k<v[i].vMat[j].nroAlumnos;k++){  //cargar alumnos
+				cout<<"ingrese nombre del alumno ";
+				do{
+					gets(v[i].vMat[j].vAlu[k].nombre);
+				}while(strlen(v[i].vMat[j].vAlu[k].nombre)==0);
+				cout<<"ingrese sexo del alumno <F/M>"<<"  ";
+				cin>>v[i].vMat[j].vAlu[k].sexo;
+				cout<<"ingrese la nota del alumno ";
+				cin>>v[i].vMat[j].vAlu[k].nota;
+				}
+		}
+}
+
+
+}
+//void mostrarDatos
+void main(){
+	regCarrera vecMiUniv[20];
+int nroCarreras;
+alumno a;
+cout<< " cuantas carreras tiene la universidad ?? ";
+cin>>nroCarreras;
+cargar(vecMiUniv,nroCarreras);
+
+
+
+getch();
+
+}
