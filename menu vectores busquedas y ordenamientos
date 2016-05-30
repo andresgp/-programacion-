@@ -1,0 +1,185 @@
+#include <iostream>
+#include <conio.h>
+#include<time.h>
+using namespace std;
+void cargarAleatorios(int v[], int n){
+	int i;
+	srand((unsigned)time(0));
+	for (int i = 0; i < n; i++){
+		v[i] = rand() % 100;
+	
+}
+
+
+}
+void mostrar(int v[], int n){
+	int i;
+	for (i = 0; i < n; i++){
+		cout << v[i]<<"   ";
+	}
+
+}
+void Burbuja(int v[], int n){
+	int i,j,temp;
+	for (i = 1; i < n; i++){
+		for (j = 0; j<n - 1; j++){
+			if (v[j] > v[j + 1]){
+				temp = v[j];
+				v[j] = v[j + 1];
+				v[j + 1] = temp;
+			}
+		}
+	}
+}
+// Función para dividir el array y hacer los intercambios
+int divide(int *array, int start, int end) {
+	int left;
+	int right;
+	int pivot;
+	int temp;
+
+	pivot = array[start];
+	left = start;
+	right = end;
+
+	// Mientras no se cruzen los índices
+	while (left < right) {
+		while (array[right] > pivot) {
+			right--;
+		}
+
+		while ((left < right) && (array[left] <= pivot)) {
+			left++;
+		}
+
+		// Si todavía no se cruzan los indices seguimos intercambiando
+		if (left < right) {
+			temp = array[left];
+			array[left] = array[right];
+			array[right] = temp;
+		}
+	}
+
+	// Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
+	temp = array[right];
+	array[right] = array[start];
+	array[start] = temp;
+
+	// La nueva posición del pivot
+	return right;
+}
+
+// Función recursiva para hacer el ordenamiento
+void quicksort(int *array, int start, int end)
+{
+	int pivot;
+
+	if (start < end) {
+		pivot = divide(array, start, end);
+
+		// Ordeno la lista de los menores
+		quicksort(array, start, pivot - 1);
+
+		// Ordeno la lista de los mayores
+		quicksort(array, pivot + 1, end);
+	}
+}
+void barajas(int v[], int n){
+	int i, temp, j;
+	for (i = 1; i<n; i++){
+		temp = v[i];
+		j = i - 1;
+		while ((v[j] > temp) && (j >= 0)){
+			v[j + 1] = v[j];
+			j--;
+			v[j + 1] = temp;
+		}
+	}
+}
+
+
+void busquedaBinaria(int  vector[], int n, int dato) {
+	int centro, inf = 0, sup = n - 1;
+	while (inf <= sup){
+		centro = ((sup - inf) / 2) + inf;
+		if (vector[centro] == dato)       cout<<"si se encuentra"<<centro;
+		else if (dato < vector[centro]) sup = centro - 1;
+		else                           inf = centro + 1;
+	}
+
+	cout << "no se encuentra";
+}
+void busquedaSecuencial(int  vector[], int n, int dato) {
+
+	int i;
+
+	for (i = 0; i<n; i++){
+		if (dato == vector[i]) {
+			cout<<"se encuentra en la posicion"<< i;
+			break;
+		}
+		else {
+			cout << "el elemento " << dato << "no se encuantra en el vector ";
+		}
+	}
+
+	
+
+}
+void cargar(int vec[], int n){
+	int i;
+	for (i = 0; i < n; i++){
+		cout << "introducir elemento [" << i << "]:";
+		cin >> vec[i];
+	}
+}
+	void main(){
+		int v[30], nroElem =0, opcion, start = 0, x, Elem;
+		do{
+			cout << endl << "***** MENU ******";
+			cout << endl << "1.- Cargar vector con numeros aleatorios";
+			cout << endl << "2.- Mostrar vector";
+			cout << endl << "3.- ordenar por burbuja";
+			cout << endl << "4.- ordenar por quicksort";
+			cout << endl << "5.- ordenar por barajas";
+			cout << endl << "6.- cargar vector manualmente";
+			cout << endl << "7.- busqueda secuencial";
+			cout << endl << "8.- busqueda binaria";
+			cout << endl << "0.- Salir";
+			cout << endl << "Seleccione Opcion";
+			cin >> opcion;
+			switch (opcion){
+			case 1: cout << "Introducir numero de elementos:";
+				cin >> nroElem;
+				cargarAleatorios(v, nroElem);
+				break;
+			case 2: mostrar(v, nroElem);
+				break;
+			case 3: cout << "el vector queda.... ";
+				Burbuja(v, nroElem);
+				mostrar(v, nroElem);
+				break;
+			case 4: cout << "\el vector queda.... ";
+				quicksort(v, start, nroElem - 1);
+				mostrar(v, nroElem);
+				break;
+			case 5: cout << "\el vector queda.... ";
+				barajas(v, nroElem);
+				mostrar(v, nroElem);
+				break;
+			case 6: cout << "Introducir numero de elementos:";
+				cin >> nroElem;
+				cargar(v, nroElem);
+				break;
+			case 7: cout << "\introduzca elemento a buscar ";
+				cin >> x;
+				busquedaSecuencial(v, nroElem, x);
+				break;
+			case 8: cout << "\introduzca elemento a buscar ";
+				cin >> x;
+				busquedaBinaria(v, nroElem, x);
+				break;
+			}
+		} while (opcion != 0);
+	}
+
