@@ -1,0 +1,192 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#include <stdio.h>
+#include <Windows.h>
+#include <stdlib.h>
+using namespace std;
+struct registro{
+	int Dpto;
+	int Prov;
+	int Local;
+	char nombre[30];
+	char sexo;
+	int  edad;
+	int fecha;
+
+};
+void CrearArchivo(char nomArch[]){
+	FILE *ptr;
+	ptr = fopen("nomArch", "wb");
+	fclose(ptr);
+}
+void addDatos(){
+	FILE *ptr;
+	registro reg;
+	cout << "ingrese departamento";
+	cin >> reg.Dpto;
+	cout << "ingrese provincia";
+	cin >> reg.Prov;
+	cout << "ingrese localidad";
+	cin >> reg.Local;
+	cout << "ingrese Nombre";
+	cin >> reg.nombre;
+	cout << "ingrese sexo <M/F>";
+	cin >> reg.sexo;
+	cout << "ingrese edad";
+	cin >> reg.edad;
+	ptr = fopen("datos.dat", "ab");
+	fwrite(&reg, sizeof(reg), 1, ptr);
+	fclose(ptr);
+}
+void reporte(){
+	FILE *ptr;
+	registro reg;
+	int c = 0;
+	ptr = fopen("datos.dat", "rb");
+	if (ptr != NULL){
+		fread(&reg, sizeof(reg), 1, ptr);
+		cout << "\n\n====================================================================";
+		cout << "\n *********** REPORTE DE DATOS ************** ";
+		cout << "\n-------------------------------------------------------------------";
+		cout << "\n\tNroReg Dpto    Prov      Local     Nombre      Sexo      Edad";
+		cout << "\n-------------------------------------------------------------------";		
+		while(feof(ptr) == false){
+			c++;
+			cout << endl << "  \t  " << c << "  \t  " << reg.Dpto << "  \t  " << reg.Prov << "  \t  " << reg.Local << "  \t  " << reg.nombre << "  \t  "<<"  \t  " << reg.sexo << "  \t  " <<reg.edad;
+			fread(&reg, sizeof(reg), 1, ptr);
+		}fclose(ptr);
+		cout << "\n====================================================================";
+	}
+	else{
+		cout << "\nError.... No existe el archivo...!!!\n";
+	}
+	
+}
+
+void CorteDeControl(){
+	FILE *ptr;
+	registro reg;
+	int  D,L , P ,XG=0,CG=0, XL=0, CL=0, XP=0, CP=0, XD=0, CD = 0;
+	ptr = fopen("datos.dat", "rb");
+	if (ptr != NULL){
+		fread(&reg, sizeof(reg), 1, ptr);
+		while (feof(ptr) == false){
+			D = reg.Dpto;
+			while ((D == reg.Dpto) && (feof(ptr)==false)){
+				P = reg.Prov;
+				while ((P == reg.Prov) && (D == reg.Dpto) && (feof(ptr) == false)){
+					L = reg.Local;
+					while ((L == reg.Local) && (P == reg.Prov) && (D == reg.Dpto) && (feof(ptr) == false)){
+						XL = XL + reg.edad;
+						CL++;
+						fread(&reg, sizeof(reg), 1, ptr);
+					}cout << endl<<"el promedio local es...." << XL / CL;
+					XP = XP + XL;
+					CP = CP + CL;
+					XL = CL = 0;
+				}cout <<endl<< "El promedio provincial es..." << XP / CP;
+				XD = XD + XP;
+				CD = CD + CP;
+				XP = CP = 0;
+			}cout <<endl<< "el promedio departamental  es...." << XD / CD;
+			XG = XG + XD;
+			CG = CG + CD;
+			XD = CD = 0;
+		}cout <<endl<< "El promedio general es...." << XG / CG;
+	}
+}
+void EliminarFisico(char nombre[]){
+	FILE *ptr;
+	registro reg, vec[100];
+	int cont=0;
+	ptr = fopen("datos.dat", "rb");
+	if (ptr != NULL){
+		fread(&reg, sizeof(reg), 1, ptr);
+		while (feof(ptr) == false){
+			if (strcmp(reg.nombre, nombre)!=0){
+				vec[cont] = reg;
+				cont++;
+
+			}fread(&reg, sizeof(reg), 1, ptr);
+		}fclose(ptr);
+	}
+	ptr = fopen("datos.dat", "wb");
+	for (int i = 0; i < cont; i++){
+		reg = vec[cont];
+		fwrite(&vec[i], sizeof(vec[i]), 1, ptr);
+	}fclose(ptr);
+
+}
+void ordenarEdad(){
+	FILE *ptr;
+	registro reg,vec[100];
+	int cont = 0;
+	ptr=fopen("datos.dat", "rb");
+	if (ptr != NULL){
+		fread(&reg, sizeof(reg), 1, ptr);
+		while (feof(ptr) == false){
+			vec[cont] = reg;
+			cont++;
+			fread(&reg, sizeof(reg), 1, ptr);
+		}fclose(ptr);
+	}
+	ptr = fopen("datos.dat", "wb");
+	for (int i = 0; i < cont; i++){
+		for (int j = i+1 ; j<cont; j++){
+			if (vec[i].edad>vec[j].edad){
+				reg = vec[i];
+				vec[i] = vec[j];
+				vec[j] = reg;
+			}
+		}
+		fwrite(&vec[i], sizeof(vec[i]), 1, ptr);
+
+	}fclose(ptr);
+	}
+
+
+
+void main(){
+	int opcion,r;
+	char nombre[100];
+	do{
+		cout << "\n\n\t\t**** M E N U *****";
+		cout << "\n\t1.- Crear archivo Registro";
+		cout << "\n\t2.- Agregar nuevo registro";
+		cout << "\n\t3.- Mostrar todos  los registros";
+		cout << "\n\-------------------------------------------";
+		cout << "\n\t4.- Corte de control";
+		cout << "\n\t5.- Eliminar registro Fisico";
+		cout << "\n\t6.- Ordenar por edad";
+		cout << "\n\-------------------------------------------";
+		cout << "\n\t0.- Salir";
+		cout << "\n\-------------------------------------------";
+		cout << "\n\tSeleccione opcion : ";
+		cin >> opcion;
+		switch (opcion){
+		case 1:
+			CrearArchivo("datos.dat");
+			cout << "archivo creado exitosamente...";
+			break;
+		case 2:  addDatos();
+			break;
+		case 3:  reporte();
+			break;
+		case 4:  CorteDeControl();
+			break;
+		case 5:  cout << "introducir nombre";
+			fflush(stdin);
+			gets(nombre);
+			EliminarFisico(nombre);
+			break;
+		case 6:  ordenarEdad();
+			break;
+
+		}
+
+		
+		
+	} while (opcion != 0);
+	
+}
